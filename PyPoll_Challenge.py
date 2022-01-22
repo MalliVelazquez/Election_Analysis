@@ -7,9 +7,11 @@ import os
 
 
 # Add a variable to load a file from a path.
-file_to_load = os.path.join("..", "Resources","election_results.csv")
+file_to_load = os.path.join("Resources","election_results.csv")
 # Add a variable to save the file to a path.
 file_to_save = os.path.join("analysis", "election_analysis.txt")
+# Adding the folder that should contain the results
+folder_to_save = os.path.join("analysis")
 
 
 # Initialize a total vote counter.
@@ -31,9 +33,9 @@ winning_percentage = 0
 # 2: Track the largest county and county voter turnout.
 largest_turnout_county_name = ""
 largest_turnout_county_votes= 0 
-#%%
+
 # Read the csv and convert it into a list of dictionaries
-with open("..\Resources\election_results.csv") as election_data:
+with open(file_to_load) as election_data:
     reader = csv.reader(election_data)
 
 
@@ -81,7 +83,11 @@ with open("..\Resources\election_results.csv") as election_data:
 
 
 # Save the results to our text file.
-with open(file_to_save, "w") as txt_file:
+
+#if os.path.exists(folder_to_save):
+#    os.makedirs(folder_to_save)
+
+with open(file_to_save, "w+") as txt_file:
 
     # Print the final vote count (to terminal)
     election_results = (
@@ -157,5 +163,4 @@ with open(file_to_save, "w") as txt_file:
 
     # Save the winning candidate's name to the text file
     txt_file.write(winning_candidate_summary)
-
 # %%
